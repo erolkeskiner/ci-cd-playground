@@ -2,13 +2,13 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,flask,groovy,helm,intellij,pycharm,terraform,virtualenv
 
 ### Flask ###
-instance/*
-!instance/.gitignore
+**/instance/*
+**/!instance/.gitignore
 .webassets-cache
 
 ### Flask.Python Stack ###
 # Byte-compiled / optimized / DLL files
-__pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
 
@@ -17,21 +17,21 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
+**/build/
+**/develop-eggs/
+**/dist/
+**/downloads/
+**/eggs/
+**/.eggs/
+**/lib/
+**/lib64/
+**/parts/
+**/sdist/
+**/var/
+**/wheels/
+**/pip-wheel-metadata/
+**/share/python-wheels/
+**/*.egg-info/
 .installed.cfg
 *.egg
 MANIFEST
@@ -47,9 +47,9 @@ pip-log.txt
 pip-delete-this-directory.txt
 
 # Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
+**/htmlcov/
+**/.tox/
+**/.nox/
 .coverage
 .coverage.*
 .cache
@@ -57,8 +57,8 @@ nosetests.xml
 coverage.xml
 *.cover
 *.py,cover
-.hypothesis/
-.pytest_cache/
+**/.hypothesis/
+**/.pytest_cache/
 pytestdebug.log
 
 # Translations
@@ -72,23 +72,23 @@ db.sqlite3
 db.sqlite3-journal
 
 # Flask stuff:
-instance/
+**/instance/
 
 # Scrapy stuff:
 .scrapy
 
 # Sphinx documentation
-docs/_build/
-doc/_build/
+**/docs/_build/
+**/doc/_build/
 
 # PyBuilder
-target/
+**/target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
 
 # IPython
-profile_default/
+**/profile_default/
 ipython_config.py
 
 # pyenv
@@ -102,7 +102,7 @@ ipython_config.py
 #Pipfile.lock
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow
-__pypackages__/
+**/packages__/
 
 # Celery stuff
 celerybeat-schedule
@@ -114,11 +114,11 @@ celerybeat.pid
 # Environments
 .env
 .venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+**/env/
+**/venv/
+**/ENV/
+**/env.bak/
+**/venv.bak/
 pythonenv*
 
 # Spyder project settings
@@ -129,18 +129,18 @@ pythonenv*
 .ropeproject
 
 # mkdocs documentation
-/site
+**//site
 
 # mypy
-.mypy_cache/
+**/.mypy_cache/
 .dmypy.json
 dmypy.json
 
 # Pyre type checker
-.pyre/
+**/.pyre/
 
 # pytype static type analyzer
-.pytype/
+**/.pytype/
 
 # profiling data
 .prof
@@ -149,8 +149,8 @@ dmypy.json
 # .gitignore created from Groovy contributors in https://github.com/apache/groovy/blob/master/.gitignore
 
 user.gradle
-.gradle/
-out/
+**/.gradle/
+**/out/
 
 *.DS_Store
 *.class
@@ -163,42 +163,42 @@ out/
 *.iws
 .shelf
 
-.settings/
+**/.settings/
 .classpath
 .project
-bin/
+**/bin/
 
 
 ### Helm ###
 # Chart dependencies
-**/charts/*.tgz
+**/**/charts/*.tgz
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/**/usage.statistics.xml
-.idea/**/dictionaries
-.idea/**/shelf
+**/.idea/**/workspace.xml
+**/.idea/**/tasks.xml
+**/.idea/**/usage.statistics.xml
+**/.idea/**/dictionaries
+**/.idea/**/shelf
 
 # Generated files
-.idea/**/contentModel.xml
+**/.idea/**/contentModel.xml
 
 # Sensitive or high-churn files
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.local.xml
-.idea/**/sqlDataSources.xml
-.idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
-.idea/**/dbnavigator.xml
+**/.idea/**/dataSources/
+**/.idea/**/dataSources.ids
+**/.idea/**/dataSources.local.xml
+**/.idea/**/sqlDataSources.xml
+**/.idea/**/dynamic.xml
+**/.idea/**/uiDesigner.xml
+**/.idea/**/dbnavigator.xml
 
 # Gradle
-.idea/**/gradle.xml
-.idea/**/libraries
+**/.idea/**/gradle.xml
+**/.idea/**/libraries
 
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
@@ -214,23 +214,23 @@ bin/
 # *.ipr
 
 # CMake
-cmake-build-*/
+**/cmake-build-*/
 
 # Mongo Explorer plugin
-.idea/**/mongoSettings.xml
+**/.idea/**/mongoSettings.xml
 
 # File-based project format
 
 # IntelliJ
 
 # mpeltonen/sbt-idea plugin
-.idea_modules/
+**/.idea_modules/
 
 # JIRA plugin
 atlassian-ide-plugin.xml
 
 # Cursive Clojure plugin
-.idea/replstate.xml
+**/.idea/replstate.xml
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
@@ -239,10 +239,10 @@ crashlytics-build.properties
 fabric.properties
 
 # Editor-based Rest Client
-.idea/httpRequests
+**/.idea/httpRequests
 
 # Android studio 3.1+ serialized cache file
-.idea/caches/build_file_checksums.ser
+**/.idea/caches/build_file_checksums.ser
 
 ### Intellij Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
@@ -254,25 +254,25 @@ fabric.properties
 
 # Sonarlint plugin
 # https://plugins.jetbrains.com/plugin/7973-sonarlint
-.idea/**/sonarlint/
+**/.idea/**/sonarlint/
 
 # SonarQube Plugin
 # https://plugins.jetbrains.com/plugin/7238-sonarqube-community-plugin
-.idea/**/sonarIssues.xml
+**/.idea/**/sonarIssues.xml
 
 # Markdown Navigator plugin
 # https://plugins.jetbrains.com/plugin/7896-markdown-navigator-enhanced
-.idea/**/markdown-navigator.xml
-.idea/**/markdown-navigator-enh.xml
-.idea/**/markdown-navigator/
+**/.idea/**/markdown-navigator.xml
+**/.idea/**/markdown-navigator-enh.xml
+**/.idea/**/markdown-navigator/
 
 # Cache file creation bug
 # See https://youtrack.jetbrains.com/issue/JBR-2257
-.idea/$CACHE_FILE$
+**/.idea/$CACHE_FILE$
 
 # CodeStream plugin
 # https://plugins.jetbrains.com/plugin/12206-codestream
-.idea/codestream.xml
+**/.idea/codestream.xml
 
 ### PyCharm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -405,7 +405,7 @@ fabric.properties
 
 ### Terraform ###
 # Local .terraform directories
-**/.terraform/*
+**/**/.terraform/*
 
 # .tfstate files
 *.tfstate
