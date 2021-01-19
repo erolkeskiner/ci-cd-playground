@@ -1,8 +1,12 @@
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
 
 @app.route('/helloworld')
 def hello_world():
-    return 'Hello Stranger!'
+    name = request.args.get('name', '')
+    if name:
+        return 'Hello {}!'.format(name)
+    else:
+        return 'Hello Stranger!'
