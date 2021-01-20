@@ -1,0 +1,42 @@
+FROM alpine:3.13.0
+LABEL Maintainer="Erol Keskiner" Contact=erolksknr@gmail.com
+
+cRUN adduser -D appuser
+
+ARG PORT=5000
+ARG HOST=0.0.0.0
+
+# ensure that no partial output is held in a buffer somewhere, send all output to stdout
+ENV PYTHONUNBUFFERED=1
+
+# Make sure that python and pip is installed
+RUN echo "**** install Python and Bash ****" && \
+    apk update && \
+    apk add --no-cache python3 bash && \
+    if [ ! -e /usr/bin/python ]; then ln -sf python3 /usr/bin/python ; fi && \
+    \
+    echo "**** install pip ****" && \
+    python3 -m ensurepip && \
+    rm -r /usr/lib/python*/ensurepip && \
+    pip3 install --no-cache --upgrade pip setuptools wheel && \
+    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi
+
+
+RUN mkdir -p /web/app
+WORKDIR /web/app
+COPY app.py /web/app/.
+COPY requirements.txt /web/app/.
+
+RUN pip install -r requirements.txt
+
+ENV FLASK_APP=/web/app/app.py
+ENV FLASK_RUN_PORT=$PORT
+ENV FLASK_RUN_HOST=$HOST
+
+RUN chown -R appuser:appuser /web/app
+
+USER appuser
+
+EXPOSE $PORT
+
+ENTRYPOINT python app.py
