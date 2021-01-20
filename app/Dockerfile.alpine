@@ -1,7 +1,7 @@
 FROM alpine:3.13.0
 LABEL Maintainer="Erol Keskiner" Contact=erolksknr@gmail.com
 
-cRUN adduser -D appuser
+RUN adduser -D appuser
 
 ARG PORT=5000
 ARG HOST=0.0.0.0
