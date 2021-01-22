@@ -1,6 +1,6 @@
 HOST:=127.0.0.1
 PORT:=8080
-APP_DIR:=./app/
+APP_DIR:=./app
 VENV_NAME:=venv
 DOCKER_TAG:=web-app
 DOCKER_CONTAINER_NAME:=web-app
@@ -8,7 +8,7 @@ VIRTUALENV:=$(shell command -v virtualenv 2> /dev/null)
 DOCKER:=$(shell command -v docker 2> /dev/null)
 PYTHON3:=$(shell command -v python3 2> /dev/null)
 VENV_BIN_DIR:=$(VENV_NAME)/bin
-REQUIREMENTS:=$(APP_DIR)requirements.txt
+REQUIREMENTS:=$(APP_DIR)/requirements.txt
 
 
 .DEFAULT_GOAL = help
@@ -47,9 +47,9 @@ clean-venv:
 clean:
 	find . -name "*.pyc" -type f -delete
 	find . -name "*.pyo" -type f -delete
-	rm -rf $(APP_DIR)build/
-	rm -rf $(APP_DIR)dist/
-	rm -rf $(APP_DIR)*.egg-info
+	rm -rf $(APP_DIR)/build/
+	rm -rf $(APP_DIR)/dist/
+	rm -rf $(APP_DIR)/*.egg-info
 
 isort: activate-venv
 	cd $(APP_DIR) && isort .
