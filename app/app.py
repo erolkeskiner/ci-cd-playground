@@ -1,5 +1,6 @@
-from flask import Flask, request
 from os import environ
+
+from flask import Flask, request
 
 app = Flask(__name__)
 
