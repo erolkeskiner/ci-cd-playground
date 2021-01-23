@@ -12,9 +12,6 @@ logging.basicConfig(level=logging.DEBUG)
 
 @app.route('/helloworld')
 def hello_world():
-    app.logger.info('Config:')
-    app.logger.info(app.config)
-    app.logger.info(app.config["HEALTHZ"])
     name = request.args.get('name', '')
     if name:
         return 'Hello {}!'.format(name)
