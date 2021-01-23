@@ -21,7 +21,7 @@ help:
 check-setup:
 ifndef PYTHON3
 	@echo "Please install python 3.6 or higher"
-	@echo "Make sure that python is executable via python3 command"
+	@echo "Make sure that python3 executable is defined in the PATH variable"
 endif
 ifndef VIRTUALENV
 	@echo "virtualenv is not available, please install it.."
