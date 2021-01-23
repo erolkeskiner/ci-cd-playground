@@ -13,6 +13,11 @@ else:
     app.config.from_object("config.DevelopmentConfig")
 
 
+@app.route('/')
+def welcome():
+    return 'Greetings to the World!'
+
+
 @app.route('/helloworld')
 def hello_world():
     name = request.args.get('name', '')
