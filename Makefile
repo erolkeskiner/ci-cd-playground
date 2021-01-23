@@ -2,7 +2,7 @@ HOST:=127.0.0.1
 PORT:=8080
 APP_DIR:=./app
 VENV_NAME:=venv
-DOCKER_TAG:=web-app
+DOCKER_TAG:=erolkeskiner/web-app
 DOCKER_CONTAINER_NAME:=web-app
 VIRTUALENV:=$(shell command -v virtualenv 2> /dev/null)
 DOCKER:=$(shell command -v docker 2> /dev/null)
@@ -68,14 +68,14 @@ docker-build:
 	cd $(APP_DIR) && $(DOCKER) build \
       --file=./Dockerfile.alpine \
       --build-arg PORT=$(PORT) \
-      --tag=web-app .
+      --tag=$(DOCKER_TAG) .
 
 docker-run: docker-rm-container
 	$(DOCKER) run \
       --detach=false \
-      --name=$(DOCKER_TAG) \
+      --name=$(DOCKER_CONTAINER_NAME) \
       --publish=$(PORT):$(PORT) \
-      $(DOCKER_CONTAINER_NAME)
+      $(DOCKER_TAG)
 
 docker-rm-container:
 	$(DOCKER) rm $(DOCKER_CONTAINER_NAME) || true
