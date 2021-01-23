@@ -3,8 +3,9 @@ LABEL Maintainer="Erol Keskiner" Contact=erolksknr@gmail.com
 
 RUN adduser -D appuser
 
-ARG PORT=5000
+ARG PORT=8000
 ARG HOST=0.0.0.0
+ARG FLASK_ENV=development
 
 # ensure that no partial output is held in a buffer somewhere, send all output to stdout
 ENV PYTHONUNBUFFERED=1
@@ -25,12 +26,14 @@ RUN echo "**** install Python and Bash ****" && \
 RUN mkdir -p /web/app
 WORKDIR /web/app
 COPY app.py /web/app/.
+COPY config.py /web/app/.
 COPY requirements.txt /web/app/.
 
 RUN pip install -r requirements.txt
 
 ENV FLASK_RUN_PORT=$PORT
 ENV FLASK_RUN_HOST=$HOST
+ENV FLASK_ENV=$FLASK_ENV
 
 RUN chown -R appuser:appuser /web/app
 
@@ -38,4 +41,4 @@ USER appuser
 
 EXPOSE $PORT
 
-ENTRYPOINT python app.py
+ENTRYPOINT python -m flask run
