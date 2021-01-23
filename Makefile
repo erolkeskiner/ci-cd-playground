@@ -62,7 +62,7 @@ test: activate-venv clean
 	cd $(APP_DIR) && python -m pytest
 
 run: activate-venv
-	cd $(APP_DIR) && python app.py
+	cd $(APP_DIR) && export FLASK_ENV=development && python -m flask run --host=$(HOST) --port=$(PORT)
 
 docker-build:
 	cd $(APP_DIR) && $(DOCKER) build \
