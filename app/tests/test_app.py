@@ -1,4 +1,4 @@
-def test_root(app, client):
+def test_welcome(app, client):
     res = client.get('/')
     assert res.status_code == 200
     expected = 'Greetings to the World!'
