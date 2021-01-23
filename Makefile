@@ -68,7 +68,7 @@ lint-chart:
 lint-all: lint-app lint-chart
 
 test: activate-venv clean
-	cd $(APP_DIR) && python -m pytest
+	cd $(APP_DIR) && export FLASK_ENV=testing && python -m pytest
 
 run: activate-venv
 	cd $(APP_DIR) && export FLASK_ENV=development && python -m flask run --host=$(HOST) --port=$(PORT)
