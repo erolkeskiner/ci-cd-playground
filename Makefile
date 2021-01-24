@@ -9,7 +9,7 @@ VIRTUALENV:=$(shell command -v virtualenv 2> /dev/null)
 DOCKER:=$(shell command -v docker 2> /dev/null)
 PYTHON3:=$(shell command -v python3 2> /dev/null)
 HELM:=$(shell command -v helm 2> /dev/null)
-VENV_BIN_DIR:=$(VENV_NAME)/bin
+VENV_BIN_DIR:=./$(VENV_NAME)/bin
 REQUIREMENTS:=$(APP_DIR)/requirements.txt
 
 
