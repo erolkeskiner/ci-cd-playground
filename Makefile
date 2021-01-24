@@ -70,10 +70,16 @@ lint-all: lint-app lint-chart
 test: activate-venv clean
 	cd $(APP_DIR) && export FLASK_ENV=testing && python -m pytest
 
+coverage:
+	cd $(APP_DIR) && export FLASK_ENV=testing  && coverage run --source=./ -m pytest
+
+coverage-report: coverage
+	cd $(APP_DIR)  && coverage report
+
 run: activate-venv
 	cd $(APP_DIR) && export FLASK_ENV=development && python -m flask run --host=$(HOST) --port=$(PORT)
 
-build: lint-app test
+build: activate-venv lint-app test
 	cd $(APP_DIR) && python setup.py install sdist bdist_wheel
 
 docker-build: build
