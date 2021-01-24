@@ -73,6 +73,9 @@ test: activate-venv clean
 run: activate-venv
 	cd $(APP_DIR) && export FLASK_ENV=development && python -m flask run --host=$(HOST) --port=$(PORT)
 
+build: lint-app test
+	cd $(APP_DIR) && python setup.py install sdist bdist_wheel
+
 docker-build:
 	cd $(APP_DIR) && $(DOCKER) build \
       --file=./Dockerfile.alpine \
