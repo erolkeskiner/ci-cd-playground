@@ -25,11 +25,10 @@ RUN echo "**** install Python and Bash ****" && \
 
 RUN mkdir -p /web/app
 WORKDIR /web/app
-COPY app.py /web/app/.
+COPY dist/*.whl /web/app/.
 COPY config.py /web/app/.
-COPY requirements.txt /web/app/.
 
-RUN pip install -r requirements.txt
+RUN pip install *.whl
 
 ENV FLASK_RUN_PORT=$PORT
 ENV FLASK_RUN_HOST=$HOST
@@ -41,4 +40,4 @@ USER appuser
 
 EXPOSE $PORT
 
-ENTRYPOINT python -m flask run
+ENTRYPOINT gunicorn --bind 0.0.0.0:${PORT} "app:create_app()"

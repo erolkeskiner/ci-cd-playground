@@ -76,7 +76,7 @@ run: activate-venv
 build: lint-app test
 	cd $(APP_DIR) && python setup.py install sdist bdist_wheel
 
-docker-build:
+docker-build: build
 	cd $(APP_DIR) && $(DOCKER) build \
       --file=./Dockerfile.alpine \
       --build-arg PORT=$(PORT) \
@@ -87,6 +87,7 @@ docker-run: docker-rm-container
       --detach=false \
       --name=$(DOCKER_CONTAINER_NAME) \
       --publish=$(PORT):$(PORT) \
+      --env PORT=$(PORT) \
       $(DOCKER_TAG)
 
 docker-rm-container:
