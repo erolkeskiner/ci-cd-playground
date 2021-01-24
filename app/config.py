@@ -2,8 +2,8 @@ class Config(object):
     DEBUG = False
     TESTING = False
     HEALTHZ = {
-        "live": "app.liveness",
-        "ready": "app.readiness",
+        "live": "app.base_routes.liveness",
+        "ready": "app.base_routes.readiness",
     }
 
 
