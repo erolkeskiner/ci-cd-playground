@@ -57,10 +57,10 @@ clean:
 	rm -rf $(APP_DIR)/*.egg-info
 
 isort:
-	cd $(APP_DIR) && &(VENV_BIN_DIR)/isort .
+	cd $(APP_DIR) && $(VENV_BIN_DIR)/isort .
 
 lint-app:
-	cd $(APP_DIR) && &(VENV_BIN_DIR)/flake8
+	cd $(APP_DIR) && $(VENV_BIN_DIR)/flake8
 
 lint-chart:
 	helm lint $(CHART_DIR)
@@ -68,20 +68,20 @@ lint-chart:
 lint-all: lint-app lint-chart
 
 test: clean
-	cd $(APP_DIR) && export FLASK_ENV=testing && &(VENV_BIN_DIR)/python -m pytest
+	cd $(APP_DIR) && export FLASK_ENV=testing && $(VENV_BIN_DIR)/python -m pytest
 
 coverage:
-	cd $(APP_DIR) && export FLASK_ENV=testing  && &(VENV_BIN_DIR)/coverage run --source=./ -m pytest
+	cd $(APP_DIR) && export FLASK_ENV=testing  && $(VENV_BIN_DIR)/coverage run --source=./ -m pytest
 
 coverage-report: coverage
-	cd $(APP_DIR)  && &(VENV_BIN_DIR)/coverage report
+	cd $(APP_DIR)  && $(VENV_BIN_DIR)/coverage report
 
 run:
-	cd $(APP_DIR) && export FLASK_ENV=development && &(VENV_BIN_DIR)/python -m flask run --host=$(HOST) --port=$(PORT)
+	cd $(APP_DIR) && export FLASK_ENV=development && $(VENV_BIN_DIR)/python -m flask run --host=$(HOST) --port=$(PORT)
 
 build:lint-app test
-	&(VENV_BIN_DIR)/pip freeze
-	cd $(APP_DIR) && &(VENV_BIN_DIR)/python setup.py install sdist bdist_wheel
+	$(VENV_BIN_DIR)/pip freeze
+	cd $(APP_DIR) && $(VENV_BIN_DIR)/python setup.py install sdist bdist_wheel
 
 docker-build: build
 	cd $(APP_DIR) && $(DOCKER) build \
