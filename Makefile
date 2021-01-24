@@ -73,7 +73,10 @@ test: activate-venv clean
 run: activate-venv
 	cd $(APP_DIR) && export FLASK_ENV=development && python -m flask run --host=$(HOST) --port=$(PORT)
 
-docker-build:
+build: lint-app test
+	cd $(APP_DIR) && python setup.py install sdist bdist_wheel
+
+docker-build: build
 	cd $(APP_DIR) && $(DOCKER) build \
       --file=./Dockerfile.alpine \
       --build-arg PORT=$(PORT) \
@@ -84,6 +87,7 @@ docker-run: docker-rm-container
       --detach=false \
       --name=$(DOCKER_CONTAINER_NAME) \
       --publish=$(PORT):$(PORT) \
+      --env PORT=$(PORT) \
       $(DOCKER_TAG)
 
 docker-rm-container:
