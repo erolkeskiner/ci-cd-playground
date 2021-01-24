@@ -57,10 +57,10 @@ clean:
 	rm -rf $(APP_DIR)/*.egg-info
 
 isort: activate-venv
-	cd $(APP_DIR) && isort .
+	cd $(APP_DIR) && python -m isort .
 
 lint-app: activate-venv
-	cd $(APP_DIR) && flake8
+	cd $(APP_DIR) && python -m flake8
 
 lint-chart:
 	helm lint $(CHART_DIR)
