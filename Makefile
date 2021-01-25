@@ -60,7 +60,7 @@ isort:
 	cd $(APP_DIR) && ../$(VENV_BIN_DIR)/isort .
 
 lint-app:
-	cd $(APP_DIR) && ../$(VENV_BIN_DIR)/pylint --exit-zero --load-plugins pylint_flask ./app
+	cd $(APP_DIR) && ../$(VENV_BIN_DIR)/pylint --exit-zero --load-plugins pylint_flask ./app > pylint.log
 
 lint-chart:
 	helm lint $(CHART_DIR)
