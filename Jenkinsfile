@@ -5,7 +5,7 @@ node('master'){
     String environment = ""
     def dockerImage
     String dockerTag
-    def valueForHash = "${env.BRANCH_NAME}${env.BUILD_NUMBER}" as Object
+    def valueForHash = env.BRANCH_NAME + '-' + env.BUILD_NUMBER
     def hash = valueForHash.md5()
     stage('Initial Setup'){
         sh "make clean-venv"
