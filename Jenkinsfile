@@ -27,6 +27,7 @@ node('master'){
     }
     stage('Test'){
         sh "make lint-all"
+        recordIssues(tools: [pyLint(pattern: 'app/pylint.log')])
         sh "make test"
     }
     stage('Test Report'){
