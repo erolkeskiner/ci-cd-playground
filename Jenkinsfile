@@ -58,9 +58,9 @@ node('master'){
             sh "terraform init"
             sh "terraform import kubernetes_namespace.release-namespace ${environment}"
             sh "terraform import helm_release.local ${environment}/flask-app"
-            sh "terraform plan --var-file=${environment}.tfvars --var tag=${version}"
+            sh "terraform plan --var-file=${environment}.tfvars --var tag=${dockerTag}"
             input "Do you want to proceed with the deployment ?"
-            sh "terraform apply --var-file=${environment}.tfvars --var tag=${version} --auto-approve"
+            sh "terraform apply --var-file=${environment}.tfvars --var tag=${dockerTag} --auto-approve"
         }
     }
 }
