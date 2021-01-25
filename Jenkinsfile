@@ -11,6 +11,7 @@ node('master'){
         sh "make build"
     }
     stage('Test'){
+        sh "make lint-all"
         sh "make test"
     }
     stage('Test Report'){
