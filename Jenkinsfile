@@ -3,6 +3,7 @@ node('master'){
     checkout scm
     String version = ""
     String environment = ""
+    def image
     stage('Initial Setup'){
         sh "make clean-venv"
         sh "make install"
@@ -40,16 +41,20 @@ node('master'){
     }
     stage('Build Docker Image'){
         sh "make docker-build -e DOCKER_TAG=erolkeskiner/basic-web-app:${version} PORT=8000"
+        dir("app"){
+            image = docker.build ("erolkeskiner/basic-web-app:${version}", "-f ./Dockerfile.alpine .")
+        }
     }
     stage('Publish Docker Image'){
-        withCredentials([usernamePassword(credentialsId: 'f946777f-7915-4e23-a86a-1af0bc0068d4', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-            sh "docker login -u $USERNAME -p $PASSWORD"
+        withDockerRegistry(credentialsId: 'f946777f-7915-4e23-a86a-1af0bc0068d4', toolName: 'Docker', url: 'https://index.docker.io/v1/') {
+            image.push()
         }
-        sh "docker push erolkeskiner/basic-web-app:${version}"
     }
     stage("Deploy to ${environment}"){
     dir("deploy/terraform"){
             sh "terraform init"
+            sh "terraform import kubernetes_namespace.release-namespace ${environment}"
+            sh "terraform import helm_release.local ${environment}/flask-app"
             sh "terraform plan --var-file=${environment}.tfvars --var tag=${version}"
             input "Do you want to proceed with the deployment ?"
             sh "terraform apply --var-file=${environment}.tfvars --var tag=${version} --auto-approve"
