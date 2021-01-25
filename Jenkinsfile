@@ -3,6 +3,7 @@ node('master'){
     checkout scm
     String version = ""
     String environment = ""
+    def image
     stage('Initial Setup'){
         sh "make clean-venv"
         sh "make install"
@@ -40,13 +41,16 @@ node('master'){
     }
     stage('Build Docker Image'){
         sh "make docker-build -e DOCKER_TAG=erolkeskiner/basic-web-app:${version} PORT=8000"
+        dir("app"){
+            image = docker.build ()"erolkeskiner/basic-web-app:${version}", "Dockerfile.alpine")
+        }
     }
     stage('Publish Docker Image'){
         /* withCredentials([usernamePassword(credentialsId: 'f946777f-7915-4e23-a86a-1af0bc0068d4', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
             sh "docker login -u $USERNAME -p $PASSWORD"
         } */
         withDockerRegistry(credentialsId: 'f946777f-7915-4e23-a86a-1af0bc0068d4', url: 'https://index.docker.io/v1/') {
-            sh "docker push erolkeskiner/basic-web-app:${version}"
+            image.push()
         }
     }
     stage("Deploy to ${environment}"){
