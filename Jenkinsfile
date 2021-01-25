@@ -42,10 +42,12 @@ node('master'){
         sh "make docker-build -e DOCKER_TAG=erolkeskiner/basic-web-app:${version} PORT=8000"
     }
     stage('Publish Docker Image'){
-        withCredentials([usernamePassword(credentialsId: 'f946777f-7915-4e23-a86a-1af0bc0068d4', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+        /* withCredentials([usernamePassword(credentialsId: 'f946777f-7915-4e23-a86a-1af0bc0068d4', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
             sh "docker login -u $USERNAME -p $PASSWORD"
+        } */
+        withDockerRegistry(credentialsId: 'f946777f-7915-4e23-a86a-1af0bc0068d4', url: 'docker.io/erolkeskiner/basic-web-app') {
+            sh "docker push erolkeskiner/basic-web-app:${version}"
         }
-        sh "docker push erolkeskiner/basic-web-app:${version}"
     }
     stage("Deploy to ${environment}"){
     dir("deploy/terraform"){
