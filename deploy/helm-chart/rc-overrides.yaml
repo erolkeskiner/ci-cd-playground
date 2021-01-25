@@ -9,7 +9,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: app.example.rc
+    - host: rc.example.local
       paths:
         - /
 
