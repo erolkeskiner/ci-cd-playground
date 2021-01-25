@@ -50,7 +50,7 @@ node('master'){
     stage("Deploy to ${environment}"){
     dir("deploy/terraform"){
             sh "terraform init"
-            sh "terraform refresh --var-file=${environment}.tfvars"
+            sh "terraform import helm_release.local ${environment}/flask-app"
             sh "terraform plan --var-file=${environment}.tfvars --var tag=${version}"
             input "Do you want to proceed with the deployment ?"
             sh "terraform apply --var-file=${environment}.tfvars --var tag=${version} --auto-approve"
