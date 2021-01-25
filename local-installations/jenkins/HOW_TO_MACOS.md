@@ -60,7 +60,7 @@ The command line tools used to run the CI/CD pipeline in this project such as do
 To use from the host machine, the binary executable files of these tools can be placed in a specific directory and this directory can be added to the Jenkins Global environment variables.
 In this project, the Jenkins server was installed locally as non-containerized service, and the mentioned command line tools were installed in a specific directory and used from there.
 
-Also, in order to perform operations on the local K8s cluster from Jenkins, a kubeconfig file was created by connecting to the Minikube K8s cluster (refer [here](https://matthewpalmer.net/kubernetes-app-developer/articles/guide-install-kubernetes-mac.html) for the installation) from the local machine. 
+Also, in order to perform operations on the local K8s cluster from Jenkins, a kubeconfig file was created by connecting to the Minikube K8s cluster (refer [here](https://minikube.sigs.k8s.io/docs/start/) for the installation) from the local machine. 
 This file was placed in a specific directory, and the file path has also been added to the Jenkins Global environment variables.
 
 ![Global Environmental Variables](img/global_env_vars.png)
