@@ -6,12 +6,27 @@ node('master'){
         sh "make clean-venv"
         sh "make install"
         sh "source venv/bin/activate"
-        println(env.TAG_NAME)
-        println(env.BRANCH_NAME)
-//         if(!env.TAG_NAME){
-//         } else if (env.BRANCH_NAME.equals("main")){
-//         } else {
-//         }
+        def targetVersionJsonData
+        try{
+            targetVersionJsonData = readJSON file: "app/target-version.json"
+          } catch (Exception e) {
+            error("Cannot read app/target-version.json file.\nError:\n${e}")
+          }
+        String version = ""
+        if(!env.TAG_NAME){
+            println(env.TAG_NAME)
+            version = targetVersionJsonData["target-version"]
+        } else if (env.BRANCH_NAME.equals("main")){
+            println(env.BRANCH_NAME)
+            version = "${targetVersionJsonData["target-version"]}-rc-${env.BUILD_NUMBER}"
+        } else {
+            println(env.BRANCH_NAME)
+            version = "${targetVersionJsonData["target-version"]}-dev-${env.BUILD_NUMBER}"
+        }
+        println version
+        targetVersionJsonData["target-version"] = version
+        writeJSON(file: 'target-version.json', json: targetVersionJsonData)
+        sh "cat app/target-version.json"
 
     }
     stage('Build'){
