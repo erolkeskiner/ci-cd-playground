@@ -49,7 +49,7 @@ node('master'){
         /* withCredentials([usernamePassword(credentialsId: 'f946777f-7915-4e23-a86a-1af0bc0068d4', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
             sh "docker login -u $USERNAME -p $PASSWORD"
         } */
-        withDockerRegistry(credentialsId: 'f946777f-7915-4e23-a86a-1af0bc0068d4', url: 'https://index.docker.io/v1/') {
+        withDockerRegistry(credentialsId: 'f946777f-7915-4e23-a86a-1af0bc0068d4', toolName: 'Docker', url: 'https://index.docker.io/v1/') {
             image.push()
         }
     }
