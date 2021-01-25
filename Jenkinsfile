@@ -3,7 +3,9 @@ node('master'){
     checkout scm
     String version = ""
     String environment = ""
-    def image
+    def dockerImage
+    String dockerTag
+    UUID uuid = UUID.randomUUID()
     stage('Initial Setup'){
         sh "make clean-venv"
         sh "make install"
@@ -18,14 +20,15 @@ node('master'){
             version = targetVersionJsonData["target-version"]
             environment = "prod"
         } else if (env.BRANCH_NAME.equals("main")){
-            version = "${targetVersionJsonData["target-version"]}-rc-${env.BUILD_NUMBER}"
+            version = "${targetVersionJsonData["target-version"]}-rc"
             environment = "rc"
         } else {
-            version = "${targetVersionJsonData["target-version"]}-dev-${env.BUILD_NUMBER}"
+            version = "${targetVersionJsonData["target-version"]}-dev"
             environment = "dev"
         }
         targetVersionJsonData["target-version"] = version
         writeJSON(file: 'app/target-version.json', json: targetVersionJsonData)
+        dockerTag = "${version}-${uuid}"
     }
     stage('Test'){
         sh "make lint-all"
@@ -40,14 +43,13 @@ node('master'){
         sh "make build"
     }
     stage('Build Docker Image'){
-        sh "make docker-build -e DOCKER_TAG=erolkeskiner/basic-web-app:${version} PORT=8000"
         dir("app"){
-            image = docker.build ("erolkeskiner/basic-web-app:${version}", "-f ./Dockerfile.alpine .")
+            dockerImage = docker.build ("erolkeskiner/basic-web-app:${dockerTag}", "-f ./Dockerfile.alpine .")
         }
     }
     stage('Publish Docker Image'){
         withDockerRegistry(credentialsId: 'f946777f-7915-4e23-a86a-1af0bc0068d4', toolName: 'Docker', url: 'https://index.docker.io/v1/') {
-            image.push()
+            dockerImage.push()
         }
     }
     stage("Deploy to ${environment}"){
@@ -55,9 +57,9 @@ node('master'){
             sh "terraform init"
             sh "terraform import kubernetes_namespace.release-namespace ${environment}"
             sh "terraform import helm_release.local ${environment}/flask-app"
-            sh "terraform plan --var-file=${environment}.tfvars --var tag=${version}"
+            sh "terraform plan --var-file=${environment}.tfvars --var tag=${dockerTag}"
             input "Do you want to proceed with the deployment ?"
-            sh "terraform apply --var-file=${environment}.tfvars --var tag=${version} --auto-approve"
+            sh "terraform apply --var-file=${environment}.tfvars --var tag=${dockerTag} --auto-approve"
         }
     }
 }
