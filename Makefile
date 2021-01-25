@@ -34,7 +34,6 @@ endif
 ifndef HELM
 	@echo "helm is not available, please install it.."
 endif
-	@echo "Installations are checked"
 
 install: check-setup
 	$(VIRTUALENV) $(VENV_NAME) -p $(PYTHON3)
@@ -52,29 +51,36 @@ clean-venv:
 clean:
 	find . -name "*.pyc" -type f -delete
 	find . -name "*.pyo" -type f -delete
+	find . -name "coverage.xml" -type f -delete
 	rm -rf $(APP_DIR)/build/
 	rm -rf $(APP_DIR)/dist/
 	rm -rf $(APP_DIR)/*.egg-info
 
-isort: activate-venv
-	cd $(APP_DIR) && isort .
+isort:
+	cd $(APP_DIR) && ../$(VENV_BIN_DIR)/isort .
 
-lint-app: activate-venv
-	cd $(APP_DIR) && flake8
+lint-app:
+	cd $(APP_DIR) && ../$(VENV_BIN_DIR)/pylint --exit-zero --load-plugins pylint_flask ./app > pylint.log
 
 lint-chart:
 	helm lint $(CHART_DIR)
 
 lint-all: lint-app lint-chart
 
-test: activate-venv clean
-	cd $(APP_DIR) && export FLASK_ENV=testing && python -m pytest
+test: clean
+	cd $(APP_DIR) && export FLASK_ENV=testing && ../$(VENV_BIN_DIR)/python -m pytest
 
-run: activate-venv
-	cd $(APP_DIR) && export FLASK_ENV=development && python -m flask run --host=$(HOST) --port=$(PORT)
+coverage:
+	cd $(APP_DIR) && export FLASK_ENV=testing  && ../$(VENV_BIN_DIR)/coverage run --source=./app/ -m pytest
 
-build: lint-app test
-	cd $(APP_DIR) && python setup.py install sdist bdist_wheel
+coverage-report: coverage
+	cd $(APP_DIR)  && ../$(VENV_BIN_DIR)/coverage report && ../$(VENV_BIN_DIR)/coverage xml
+
+run:
+	cd $(APP_DIR) && export FLASK_ENV=development && ../$(VENV_BIN_DIR)/python -m flask run --host=$(HOST) --port=$(PORT)
+
+build:
+	cd $(APP_DIR) && ../$(VENV_BIN_DIR)/python setup.py install sdist bdist_wheel
 
 docker-build: build
 	cd $(APP_DIR) && $(DOCKER) build \

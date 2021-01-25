@@ -8,9 +8,6 @@ with open("README.md", "r", encoding="utf-8") as f:
 with open("target-version.json", "r", encoding="utf-8") as f:
     target_version = json.loads(f.read())['target-version']
 
-with open('requirements.txt') as f:
-    requirements = f.read().splitlines()
-
 setup(
     name='web_app',
     version=target_version,
@@ -23,6 +20,10 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    install_requires=requirements,
+    install_requires=[
+        'Flask==1.1.2',
+        'flask-healthz==0.0.2',
+        'gunicorn==20.0.4'
+    ],
     python_requires='>=3.6'
 )

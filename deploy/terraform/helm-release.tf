@@ -5,4 +5,8 @@ resource "helm_release" "local" {
   values = [
     file(var.helm-values-override-path)
   ]
+  set {
+    name = "image.tag"
+    value = var.tag
+  }
 }

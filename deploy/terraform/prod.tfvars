@@ -1,0 +1,5 @@
+kube-config-path = "~/.kube/config"
+namespace = "prod"
+helm-release-name = "flask-app"
+helm-values-override-path = "../helm-chart/prod-overrides.yaml"
+tag = "0.1.0"
