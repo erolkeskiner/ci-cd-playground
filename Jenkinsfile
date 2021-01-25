@@ -42,7 +42,7 @@ node('master'){
     stage('Build Docker Image'){
         sh "make docker-build -e DOCKER_TAG=erolkeskiner/basic-web-app:${version} PORT=8000"
         dir("app"){
-            image = docker.build ("erolkeskiner/basic-web-app:${version}", "Dockerfile.alpine")
+            image = docker.build ("erolkeskiner/basic-web-app:${version}", "-f ./Dockerfile.alpine .")
         }
     }
     stage('Publish Docker Image'){
