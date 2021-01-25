@@ -34,7 +34,7 @@ cat /Users/<user_name>/.jenkins/secrets/initialAdminPassword
 # Initial configuration
 Login with the generated password. 
 
-Since, we can install all extra plugins needed after the initial configuration, select 'Install suggested plugins'.
+Since, we can install [all extra plugins](#plugins) needed after the initial configuration, select 'Install suggested plugins'.
 Plugin installations might take a while.
 
 When all suggested plugins are installed, you'll be asked to create first Admin user. 
@@ -46,7 +46,15 @@ Click the `Save and Finish` button to finish the initial configuration.
 
 After the initial configuration steps, you can start using local Jenkins server by clicking the `Start using Jenkins`.
 
-# Plugin Installation
+
+# GitHub Integration
+
+[This](https://medium.com/@shreyaklexheal/integrate-jenkins-with-github-private-repo-8fb335494f7e#:~:text=Jenkins%20configuration%20to%20access%20private,Global%20credentials%20%2D%3E%20Add%20credentials.&text=Give%20username%20as%20Jenkins%20or,keys%20here%2C%20click%20on%20okay.) can be referred to establish integration between Jenkins and a GitHub repository.
+
+![Multibranch Build Pipeline Configuration](img/mb_pipeline_configuration.png)
+
+
+# Plugins
 
 Refer [here](https://linuxtechlab.com/3-methods-to-install-plugins-on-jenkins-server/), for additional plugin installations.
 
@@ -202,8 +210,3 @@ Here is the list of Jenkins plugins installed for this project:
 Note: Some plugins in the list may not have been used in this project. 
 
 
-# GitHub Integration
-
-[This](https://medium.com/@shreyaklexheal/integrate-jenkins-with-github-private-repo-8fb335494f7e#:~:text=Jenkins%20configuration%20to%20access%20private,Global%20credentials%20%2D%3E%20Add%20credentials.&text=Give%20username%20as%20Jenkins%20or,keys%20here%2C%20click%20on%20okay.) can be referred to establish integration between Jenkins and a GitHub repository.
-
-![Multibranch Build Pipeline Configuration](img/mb_pipeline_configuration.png)
