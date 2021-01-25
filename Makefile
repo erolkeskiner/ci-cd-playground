@@ -72,7 +72,7 @@ test: clean
 	cd $(APP_DIR) && export FLASK_ENV=testing && ../$(VENV_BIN_DIR)/python -m pytest
 
 coverage:
-	cd $(APP_DIR) && export FLASK_ENV=testing  && ../$(VENV_BIN_DIR)/coverage run --source=./ -m pytest
+	cd $(APP_DIR) && export FLASK_ENV=testing  && ../$(VENV_BIN_DIR)/coverage run --source=./app/ -m pytest
 
 coverage-report: coverage
 	cd $(APP_DIR)  && ../$(VENV_BIN_DIR)/coverage report && ../$(VENV_BIN_DIR)/coverage xml
