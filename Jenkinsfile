@@ -20,10 +20,10 @@ node('master'){
             version = targetVersionJsonData["target-version"]
             environment = "prod"
         } else if (env.BRANCH_NAME.equals("main")){
-            version = "${targetVersionJsonData["target-version"]}-rc-${env.BUILD_NUMBER}"
+            version = "${targetVersionJsonData["target-version"]}-rc"
             environment = "rc"
         } else {
-            version = "${targetVersionJsonData["target-version"]}-dev-${env.BUILD_NUMBER}"
+            version = "${targetVersionJsonData["target-version"]}-dev"
             environment = "dev"
         }
         targetVersionJsonData["target-version"] = version
