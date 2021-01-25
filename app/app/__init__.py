@@ -2,11 +2,15 @@ import os
 
 from flask import Flask, request
 from flask_healthz import healthz
+from app.routes.hello_world import hello_world_blueprint
+from app.routes.welcome import welcome_blueprint
 
 
 def create_app():
     app = Flask(__name__)
     app.register_blueprint(healthz, url_prefix="/healthz")
+    app.register_blueprint(welcome_blueprint)
+    app.register_blueprint(hello_world_blueprint)
 
     flask_env = os.environ['FLASK_ENV']
     if flask_env == 'production':
@@ -15,17 +19,5 @@ def create_app():
         app.config.from_object("config.TestingConfig")
     else:
         app.config.from_object("config.DevelopmentConfig")
-
-    @app.route('/')
-    def welcome():
-        return 'Greetings to the World!'
-
-    @app.route('/helloworld')
-    def hello_world():
-        name = request.args.get('name', '')
-        if name:
-            return 'Hello {}!'.format(name)
-        else:
-            return 'Hello Stranger!'
 
     return app
