@@ -79,8 +79,7 @@ coverage-report: coverage
 run:
 	cd $(APP_DIR) && export FLASK_ENV=development && ../$(VENV_BIN_DIR)/python -m flask run --host=$(HOST) --port=$(PORT)
 
-build:lint-app test
-	$(VENV_BIN_DIR)/pip freeze
+build:
 	cd $(APP_DIR) && ../$(VENV_BIN_DIR)/python setup.py install sdist bdist_wheel
 
 docker-build: build
