@@ -34,7 +34,6 @@ endif
 ifndef HELM
 	@echo "helm is not available, please install it.."
 endif
-	@echo "Installations are checked"
 
 install: check-setup
 	$(VIRTUALENV) $(VENV_NAME) -p $(PYTHON3)
