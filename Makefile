@@ -52,6 +52,7 @@ clean-venv:
 clean:
 	find . -name "*.pyc" -type f -delete
 	find . -name "*.pyo" -type f -delete
+	find . -name "coverage.xml" -type f -delete
 	rm -rf $(APP_DIR)/build/
 	rm -rf $(APP_DIR)/dist/
 	rm -rf $(APP_DIR)/*.egg-info
@@ -74,7 +75,7 @@ coverage:
 	cd $(APP_DIR) && export FLASK_ENV=testing  && ../$(VENV_BIN_DIR)/coverage run --source=./ -m pytest
 
 coverage-report: coverage
-	cd $(APP_DIR)  && ../$(VENV_BIN_DIR)/coverage report
+	cd $(APP_DIR)  && ../$(VENV_BIN_DIR)/coverage report && ../$(VENV_BIN_DIR)/coverage xml
 
 run:
 	cd $(APP_DIR) && export FLASK_ENV=development && ../$(VENV_BIN_DIR)/python -m flask run --host=$(HOST) --port=$(PORT)
