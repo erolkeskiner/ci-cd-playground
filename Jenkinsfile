@@ -1,9 +1,3 @@
-import java.security.MessageDigest
-
-def generateTagHash(String s){
-    return MessageDigest.getInstance("MD5").digest(s.bytes).encodeHex().toString()
-}
-
 node('master'){
     deleteDir()
     checkout scm
@@ -11,7 +5,7 @@ node('master'){
     String environment = ""
     def dockerImage
     String dockerTag
-    String hash = generateTagHash("${env.BRANCH_NAME}${env.BUILD_NUMBER}")
+    UUID uuid = UUID.randomUUID()
     stage('Initial Setup'){
         sh "make clean-venv"
         sh "make install"
@@ -34,7 +28,7 @@ node('master'){
         }
         targetVersionJsonData["target-version"] = version
         writeJSON(file: 'app/target-version.json', json: targetVersionJsonData)
-        dockerTag = "${version}-${hash}"
+        dockerTag = "${version}-${uuid}"
     }
     stage('Test'){
         sh "make lint-all"
