@@ -1,3 +1,9 @@
+import java.security.MessageDigest
+
+def generateTagHash(String s){
+    return MessageDigest.getInstance("MD5").digest(s.bytes).encodeHex().toString()
+}
+
 node('master'){
     deleteDir()
     checkout scm
@@ -5,8 +11,7 @@ node('master'){
     String environment = ""
     def dockerImage
     String dockerTag
-    def valueForHash = env.BRANCH_NAME + '-' + env.BUILD_NUMBER
-    def hash = valueForHash.md5()
+    String hash = generateTagHash("${env.BRANCH_NAME}${env.BUILD_NUMBER}")
     stage('Initial Setup'){
         sh "make clean-venv"
         sh "make install"
