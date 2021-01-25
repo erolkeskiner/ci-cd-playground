@@ -51,6 +51,7 @@ After the initial configuration steps, you can start using local Jenkins server 
 
 [This](https://medium.com/@shreyaklexheal/integrate-jenkins-with-github-private-repo-8fb335494f7e#:~:text=Jenkins%20configuration%20to%20access%20private,Global%20credentials%20%2D%3E%20Add%20credentials.&text=Give%20username%20as%20Jenkins%20or,keys%20here%2C%20click%20on%20okay.) can be referred to establish integration between Jenkins and a GitHub repository.
 
+## Multibranch Pipeline Configurations
 ![Multibranch Build Pipeline Configuration](img/mb_pipeline_configuration.png)
 
 # Tool Configurations
