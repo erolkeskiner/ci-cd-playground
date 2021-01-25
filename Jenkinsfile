@@ -1,11 +1,18 @@
 node('master'){
     deleteDir()
     checkout scm
-    sh 'ls -al'
+    String dockerTag = ""
     stage('Init'){
         sh "make clean-venv"
         sh "make install"
         sh "source venv/bin/activate"
+        println(env.TAG_NAME)
+        println(env.BRANCH_NAME)
+//         if(!env.TAG_NAME){
+//         } else if (env.BRANCH_NAME.equals("main")){
+//         } else {
+//         }
+
     }
     stage('Build'){
         sh "make build"
