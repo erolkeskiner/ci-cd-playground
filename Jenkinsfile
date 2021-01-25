@@ -13,7 +13,7 @@ node('master'){
             error("Cannot read app/target-version.json file.\nError:\n${e}")
           }
         String version = ""
-        if(!env.TAG_NAME){
+        if(env.TAG_NAME){
             println(env.TAG_NAME)
             version = targetVersionJsonData["target-version"]
         } else if (env.BRANCH_NAME.equals("main")){
