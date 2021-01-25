@@ -14,3 +14,6 @@ variable "helm-release-name" {
 variable "helm-values-override-path" {
   default = "../helm-chart/values-override.yaml"
 }
+variable "tag" {
+  default = "0.1.0"
+}
