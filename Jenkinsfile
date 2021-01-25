@@ -22,9 +22,6 @@ node('master'){
         targetVersionJsonData["target-version"] = version
         writeJSON(file: 'app/target-version.json', json: targetVersionJsonData)
     }
-    stage('Build'){
-        sh "make build"
-    }
     stage('Test'){
         sh "make lint-all"
         recordIssues(tools: [pyLint(pattern: 'app/pylint.log')])
@@ -33,6 +30,9 @@ node('master'){
     stage('Test Report'){
         sh "make coverage-report"
         cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'app/coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
+    }
+    stage('Build'){
+        sh "make build"
     }
     stage('Build Docker Image'){
         sh "make docker-build -e DOCKER_TAG=erolkeskiner/basic-web-app:${version} PORT=8000"
