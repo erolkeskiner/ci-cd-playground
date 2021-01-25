@@ -25,7 +25,7 @@ node('master'){
         }
         println version
         targetVersionJsonData["target-version"] = version
-        writeJSON(file: 'target-version.json', json: targetVersionJsonData)
+        writeJSON(file: 'app/target-version.json', json: targetVersionJsonData)
         sh "cat app/target-version.json"
 
     }
