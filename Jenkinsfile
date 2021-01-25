@@ -2,6 +2,7 @@ node('master'){
     deleteDir()
     checkout scm
     String version = ""
+    String environment = ""
     stage('Initial Setup'){
         sh "make clean-venv"
         sh "make install"
@@ -14,10 +15,13 @@ node('master'){
           }
         if(env.TAG_NAME){
             version = targetVersionJsonData["target-version"]
+            environment = "prod"
         } else if (env.BRANCH_NAME.equals("main")){
             version = "${targetVersionJsonData["target-version"]}-rc-${env.BUILD_NUMBER}"
+            environment = "rc"
         } else {
             version = "${targetVersionJsonData["target-version"]}-dev-${env.BUILD_NUMBER}"
+            environment = "dev"
         }
         targetVersionJsonData["target-version"] = version
         writeJSON(file: 'app/target-version.json', json: targetVersionJsonData)
@@ -42,5 +46,10 @@ node('master'){
             sh "docker login -u $USERNAME -p $PASSWORD"
         }
         sh "docker push erolkeskiner/basic-web-app:${version}"
+    }
+    stage("Deploy to ${environment}"){
+    dir("deploy/terraform"){
+            sh "terraform apply --var-file=${environment}.tfvars --var tag=${version}"
+        }
     }
 }
