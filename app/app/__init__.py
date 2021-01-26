@@ -7,6 +7,7 @@ from flask_healthz import healthz
 from .routes.hello_world import hello_world_blueprint
 from .routes.welcome import welcome_blueprint
 
+
 def create_app():
     app = Flask(__name__)
     app.register_blueprint(healthz, url_prefix="/healthz")
