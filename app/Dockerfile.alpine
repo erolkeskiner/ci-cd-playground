@@ -29,8 +29,6 @@ RUN echo "**** install Python and Bash ****" && \
     rm -f /usr/bin/x86_64-alpine-linux-musl-gcj
 
 
-
-
 RUN mkdir -p /web/app
 WORKDIR /web/app
 COPY dist/*.whl /web/app/.
