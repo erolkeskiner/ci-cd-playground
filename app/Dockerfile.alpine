@@ -51,4 +51,4 @@ USER appuser
 ENV PORT=${PORT}
 EXPOSE $PORT
 
-ENTRYPOINT gunicorn --bind 0.0.0.0:${PORT} -c gunicorn-config.py "app:create_app()"
+ENTRYPOINT gunicorn --bind 0.0.0.0:${PORT} -c gunicorn-config.py --graceful-timeout 30 "app:create_app()"
