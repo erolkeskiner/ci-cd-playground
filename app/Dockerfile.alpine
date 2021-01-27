@@ -35,6 +35,8 @@ RUN mkdir -p /web/app
 WORKDIR /web/app
 COPY dist/*.whl /web/app/.
 COPY config.py /web/app/.
+COPY gunicorn-config.py /web/app/.
+COPY logging-config.json /web/app/.
 
 RUN pip install *.whl
 
@@ -49,4 +51,4 @@ USER appuser
 ENV PORT=${PORT}
 EXPOSE $PORT
 
-ENTRYPOINT gunicorn --bind 0.0.0.0:${PORT} "app:create_app()"
+ENTRYPOINT gunicorn --bind 0.0.0.0:${PORT} -c gunicorn-config.py "app:create_app()"
