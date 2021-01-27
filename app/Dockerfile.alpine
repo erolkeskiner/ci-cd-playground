@@ -49,4 +49,4 @@ USER appuser
 ENV PORT=${PORT}
 EXPOSE $PORT
 
-ENTRYPOINT gunicorn --bind 0.0.0.0:${PORT} "app:create_app()"
+ENTRYPOINT gunicorn --bind 0.0.0.0:${PORT} --graceful-timeout 30 "app:create_app()"
