@@ -1,4 +1,4 @@
-import json
+import json, git
 
 from setuptools import find_packages, setup
 
@@ -7,6 +7,13 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 with open("target-version.json", "r", encoding="utf-8") as f:
     target_version = json.loads(f.read())['target-version']
+
+repo = git.Repo(search_parent_directories=True)
+git_info = {'commit-sha': repo.head.object.hexsha, 'repository-name': repo.remotes.origin.url,
+            'target-version': target_version}
+
+with open('git-info.json', 'w') as f:
+    f.write(json.dumps(git_info))
 
 setup(
     name='web_app',
@@ -23,7 +30,7 @@ setup(
     install_requires=[
         'Flask==1.1.2',
         'flask-healthz==0.0.2',
-        'gunicorn==20.0.4'
+        'gunicorn==20.0.4',
     ],
     python_requires='>=3.6'
 )
