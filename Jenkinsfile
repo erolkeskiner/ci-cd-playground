@@ -19,16 +19,19 @@ node('master'){
         if(env.TAG_NAME){
             version = targetVersionJsonData["target-version"]
             environment = "prod"
+            dockerTag = "${version}"
         } else if (env.BRANCH_NAME.equals("main")){
             version = "${targetVersionJsonData["target-version"]}-rc"
             environment = "rc"
+            dockerTag = "${version}-${uuid}"
         } else {
             version = "${targetVersionJsonData["target-version"]}-dev"
             environment = "dev"
+            dockerTag = "${version}-${uuid}"
         }
         targetVersionJsonData["target-version"] = version
         writeJSON(file: 'app/target-version.json', json: targetVersionJsonData)
-        dockerTag = "${version}-${uuid}"
+
     }
     stage('Test'){
         sh "make lint-all"
