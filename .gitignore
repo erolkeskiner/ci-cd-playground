@@ -450,4 +450,8 @@ pip-selfcheck.json
 # SSH keys
 **/ssh/
 
+
+# git info
+app/git-info.json
+
 # End of https://www.toptal.com/developers/gitignore/api/python,flask,groovy,helm,intellij,pycharm,terraform,virtualenv
