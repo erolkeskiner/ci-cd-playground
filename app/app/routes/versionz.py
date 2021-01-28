@@ -1,5 +1,5 @@
-from flask import Blueprint, jsonify
-import time, git, json
+from flask import Blueprint, jsonify, current_app
+import time, json, os
 
 versionz_blueprint = Blueprint('versionz', __name__)
 
@@ -7,12 +7,13 @@ versionz_blueprint = Blueprint('versionz', __name__)
 @versionz_blueprint.route('/versionz')
 def versionz():
     start = time.time()
-    repo = git.Repo(search_parent_directories=True)
-    sha = repo.head.object.hexsha
-    repository_name = repo.remotes.origin.url
+    try:
+        with open('git-info.json', 'r') as f:
+            info = json.loads(f.read())
+    except FileNotFoundError:
+        info = {}
 
     return jsonify(
-        repository_name=repository_name,
-        commit_hash=sha,
+        info=info,
         request_query_time=time.time() - start
     )
