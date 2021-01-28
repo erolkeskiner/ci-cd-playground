@@ -35,6 +35,7 @@ COPY dist/*.whl /web/app/.
 COPY config.py /web/app/.
 COPY gunicorn-config.py /web/app/.
 COPY logging-config.json /web/app/.
+COPY git-info.json /web/app/.
 
 RUN pip install *.whl
 
