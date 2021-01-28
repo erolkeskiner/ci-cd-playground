@@ -31,3 +31,12 @@ def test_liveness_probe(app, client):
     assert res.status_code == 200
     expected = 'OK\n'
     assert expected == res.get_data(as_text=True)
+
+
+def test_versionz(app, client):
+    import json
+    res = client.get('/versionz')
+    assert res.status_code == 200
+    response_data = json.loads(res.get_data(as_text=True))
+    assert 'info' in response_data
+    assert 'request_query_time' in response_data

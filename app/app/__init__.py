@@ -5,6 +5,7 @@ from flask import Flask, request
 from flask_healthz import healthz
 
 from .routes.hello_world import hello_world_blueprint
+from .routes.versionz import versionz_blueprint
 from .routes.welcome import welcome_blueprint
 
 
@@ -13,6 +14,7 @@ def create_app():
     app.register_blueprint(healthz, url_prefix="/healthz")
     app.register_blueprint(welcome_blueprint)
     app.register_blueprint(hello_world_blueprint)
+    app.register_blueprint(versionz_blueprint)
 
     flask_env = os.environ['FLASK_ENV']
     if flask_env == 'production':
