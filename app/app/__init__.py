@@ -5,8 +5,8 @@ from flask import Flask, request
 from flask_healthz import healthz
 
 from .routes.hello_world import hello_world_blueprint
-from .routes.welcome import welcome_blueprint
 from .routes.versionz import versionz_blueprint
+from .routes.welcome import welcome_blueprint
 
 
 def create_app():

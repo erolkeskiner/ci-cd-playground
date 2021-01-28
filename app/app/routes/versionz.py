@@ -1,5 +1,7 @@
-from flask import Blueprint, jsonify, current_app
-import time, json, os
+import json
+import time
+
+from flask import Blueprint, jsonify
 
 versionz_blueprint = Blueprint('versionz', __name__)
 
