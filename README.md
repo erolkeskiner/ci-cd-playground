@@ -55,7 +55,7 @@ On every pipeline execution, the code goes through the following steps:
 4. If approved, the container image is deployed in a fresh new container in related K8s namespace.
 
 Targeted release version for the Python package and Docker image is set in the `target-version.json` file in the `app` directory.
-Three tags were used as suffixes to separate the packages: dev (development), rc (release candidate), and no suffix (release)
+Three tags were used as suffixes to separate the packages: dev (development), rc (release candidate), and no suffix (release).
 
 - Any pipeline running from not main branches (a.k.a. feature/bug fix branches) builds the Python package and Docker image with the `<target-version>-dev-<uuid>` tag, then publishes the built Docker image to registry and deploys it to `dev` namespace on the K8s cluster.
 - Any pipeline running from the main branch builds the Python package and Docker image with the `<target-version>-rc-<uuid>` , then publishes the built Docker image to registry and deploys it to `rc` namespace on the K8s cluster.
