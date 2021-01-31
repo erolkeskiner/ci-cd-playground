@@ -23,7 +23,6 @@ Before you get started you'll need to have these:
 - A local or remote Jenkins server. In this project, a local installation used. Refer [here](https://github.com/erolkeskiner/ci-cd-playground/blob/main/local-installations/jenkins/HOW_TO_MACOS.md) for the local installation instructions and the configuration for this project
 - A local or remote K8s cluster. In this project, [Minikube](https://minikube.sigs.k8s.io/docs/start/) used for a local K8s cluster installation. If you will also use the Minikube, you'll need a container or virtual machine manager, such as: [Docker](https://minikube.sigs.k8s.io/docs/drivers/docker/), [Hyperkit](https://minikube.sigs.k8s.io/docs/drivers/hyperkit/), [Hyper-V](https://minikube.sigs.k8s.io/docs/drivers/hyperv/), [KVM](https://minikube.sigs.k8s.io/docs/drivers/kvm2/), [Parallels](https://minikube.sigs.k8s.io/docs/drivers/parallels/), [Podman](https://minikube.sigs.k8s.io/docs/drivers/podman/), [VirtualBox](https://minikube.sigs.k8s.io/docs/drivers/virtualbox/), or [VMWare](https://minikube.sigs.k8s.io/docs/drivers/vmware/)
 - [Python](https://www.python.org/downloads/) Version >= 3.6
-- Fork then clone the [ci-cd-playground](git@github.com:erolkeskiner/ci-cd-playground.git) repository
 
 ## Project Structure
 
@@ -45,3 +44,22 @@ Before you get started you'll need to have these:
 `deploy` directory contains the Helm Chart and the Terraform configuration files to deploy the application to a K8s cluster.
 
 `local-installations` directory contains related documents to refer for installing and configuring Jenkins server.
+
+
+## Workflow
+On every pipeline execution, the code goes through the following steps:
+
+1. Code is cloned from this repository, built, tested and analyzed for bugs and bad patterns.
+2. A Docker Container Image is built then published to Docker Container Registry.
+3. If all successful, the pipeline is paused for the approval to continue to the deployment.
+4. If approved, the container image is deployed in a fresh new container in related K8s namespace.
+
+Targeted release version for the Python package and Docker image is set in the `target-version.json` file in the `app` directory.
+Three tags were used as suffixes to separate the packages: dev (development), rc (release candidate), and no suffix (release)
+
+- Any pipeline running from not main branches (a.k.a. feature/bug fix branches) builds the Python package and Docker image with the version `<target-version>-dev-<uuid>`. Then publishes the built Docker image to registry and deploys it to `dev` namespace on the K8s cluster.
+- Any pipeline running from the main branch builds the Python package and Docker image with the version `<target-version>-rc-<uuid>`. Then publishes the built Docker image to registry and deploys it to `rc` namespace on the K8s cluster.
+- Any pipeline running from git tag builds the Python package and Docker image with the version `<target-version>`. Then publishes the built Docker image to registry and deploys it to `prod` namespace on the K8s cluster.
+
+
+
