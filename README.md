@@ -68,7 +68,7 @@ For a healthier SDLC:
 - Make your developments in feature branches.
 - Create short-lived branches.
 - Commit often. 
-- Run the pipeline to see failures fast, test the deployment on K8s.
+- Run the pipeline to see failures fast, to test the deployment on K8s.
 - Prevent merging unhealthy branches to main branch.
 
 Expand the release version identification with [community standards](https://www.python.org/dev/peps/pep-0440/).
