@@ -21,6 +21,10 @@ def test_with_url_parameter(app, client):
     assert res.status_code == 200
     expected = 'Hello Some Other Name!'
     assert expected == res.get_data(as_text=True)
+    res = client.get('/helloworld?name=someOtherName')
+    assert res.status_code == 200
+    expected = 'Hello some Other Name!'
+    assert expected == res.get_data(as_text=True)
 
 
 def test_readiness_probe(app, client):
