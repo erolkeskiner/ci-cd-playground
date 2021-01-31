@@ -1,5 +1,5 @@
 HOST:=127.0.0.1
-PORT:=8000
+PORT:=8080
 VENV_NAME:=venv
 DOCKER_TAG:=erolkeskiner/web-app
 DOCKER_CONTAINER_NAME:=web-app
