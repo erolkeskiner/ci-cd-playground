@@ -51,7 +51,10 @@ After the initial configuration steps, you can start using local Jenkins server 
 ### GitHub Integration
 
 [This](https://medium.com/@shreyaklexheal/integrate-jenkins-with-github-private-repo-8fb335494f7e#:~:text=Jenkins%20configuration%20to%20access%20private,Global%20credentials%20%2D%3E%20Add%20credentials.&text=Give%20username%20as%20Jenkins%20or,keys%20here%2C%20click%20on%20okay.) can be referred to establish integration between Jenkins and a GitHub repository.
+### Credentials
 
+In this project, two secret credentials are used, one is the SSH private key created for Jenkins-Github integration, and the other is the username-password pair to log in to the [Docker Container Registry](https://hub.docker.com/r/erolkeskiner/basic-web-app).
+![Credentials](img/credentials.png)
 ### Multibranch Pipeline Configurations
 ![Multibranch Build Pipeline Configuration](img/mb_pipeline_configuration.png)
 
@@ -59,17 +62,14 @@ After the initial configuration steps, you can start using local Jenkins server 
 
 The command line tools used to run the CI/CD pipeline in this project such as docker, kubectl, terraform can be used with related plugins, as well as they can be executed from the host machine. 
 To use from the host machine, the binary executable files of these tools can be placed in a specific directory and this directory can be added to the Jenkins Global environment variables.
-In this project, the Jenkins server was installed locally as non-containerized service, and the mentioned command line tools were installed in a specific directory and used from there.
+In this project, the Jenkins server was installed locally as non-containerized service, and the mentioned command line tools were installed in a specific directory and used from there. Please note that this is strictly not recommended for any production use.
 
-Also, in order to perform operations on the local K8s cluster from Jenkins, a kubeconfig file was created by connecting to the Minikube K8s cluster (refer [here](https://minikube.sigs.k8s.io/docs/start/) for the installation) from the local machine. 
+Also, in order to perform operations on the local K8s cluster from Jenkins, a [kubeconfig](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/) file was created by connecting to the Minikube K8s cluster (refer [here](https://minikube.sigs.k8s.io/docs/start/) for the installation) from the local machine. 
 This file was placed in a specific directory, and the file path has also been added to the Jenkins Global environment variables.
 
 ![Global Environmental Variables](img/global_env_vars.png)
 
-### Credentials
 
-In this project, two secret credentials are used, one is the SSH private key created for Jenkins-Github integration, and the other is the username-password pair to log in to the [Docker Container Registry](https://hub.docker.com/r/erolkeskiner/basic-web-app).
-![Credentials](img/credentials.png)
 ## Plugins
 
 Refer [here](https://linuxtechlab.com/3-methods-to-install-plugins-on-jenkins-server/), for additional plugin installations.
