@@ -88,7 +88,7 @@ coverage: ##		Runs the coverage on the application codes
 coverage-report: coverage ##		Creates the unit test coverage report
 	cd ./app  && ../$(VENV_BIN_DIR)/coverage report && ../$(VENV_BIN_DIR)/coverage xml
 
-run: ##		Runs locally the application using 'flask' command
+run: ##		Runs the application locally using 'flask' command
 	cd ./app && export FLASK_ENV=development && ../$(VENV_BIN_DIR)/python -m flask run --host=$(HOST) --port=$(PORT)
 
 build: ##		Builds the python package of the application
