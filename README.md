@@ -57,9 +57,9 @@ On every pipeline execution, the code goes through the following steps:
 Targeted release version for the Python package and Docker image is set in the `target-version.json` file in the `app` directory.
 Three tags were used as suffixes to separate the packages: dev (development), rc (release candidate), and no suffix (release)
 
-- Any pipeline running from not main branches (a.k.a. feature/bug fix branches) builds the Python package and Docker image with the version `<target-version>-dev-<uuid>`. Then publishes the built Docker image to registry and deploys it to `dev` namespace on the K8s cluster.
-- Any pipeline running from the main branch builds the Python package and Docker image with the version `<target-version>-rc-<uuid>`. Then publishes the built Docker image to registry and deploys it to `rc` namespace on the K8s cluster.
-- Any pipeline running from git tag builds the Python package and Docker image with the version `<target-version>`. Then publishes the built Docker image to registry and deploys it to `prod` namespace on the K8s cluster.
+- Any pipeline running from not main branches (a.k.a. feature/bug fix branches) builds the Python package and Docker image with the version `<target-version>-dev-<uuid>`, then publishes the built Docker image to registry and deploys it to `dev` namespace on the K8s cluster.
+- Any pipeline running from the main branch builds the Python package and Docker image with the version `<target-version>-rc-<uuid>`, then publishes the built Docker image to registry and deploys it to `rc` namespace on the K8s cluster.
+- Any pipeline running from git tag builds the Python package and Docker image with the version `<target-version>`, then publishes the built Docker image to registry and deploys it to `prod` namespace on the K8s cluster.
 
 
 
