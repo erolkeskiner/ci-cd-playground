@@ -15,7 +15,15 @@ def test_without_url_parameter(app, client):
 def test_with_url_parameter(app, client):
     res = client.get('/helloworld?name=SomeName')
     assert res.status_code == 200
-    expected = 'Hello SomeName!'
+    expected = 'Hello Some Name!'
+    assert expected == res.get_data(as_text=True)
+    res = client.get('/helloworld?name=SomeOtherName')
+    assert res.status_code == 200
+    expected = 'Hello Some Other Name!'
+    assert expected == res.get_data(as_text=True)
+    res = client.get('/helloworld?name=someOtherName')
+    assert res.status_code == 200
+    expected = 'Hello some Other Name!'
     assert expected == res.get_data(as_text=True)
 
 
