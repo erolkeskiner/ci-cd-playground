@@ -75,7 +75,7 @@ Expand the release version identification with [community standards](https://www
 
 Add more stages between development, release candidate, and release. This is not necessary since this is a personal and one-person project. But, with a growing team, it would be better to have more controls before merging the feature branches to the main branch.
 
-The CI/CD pipeline covered in this project is only for one application. Add some other units such as a database or an another service that the app will communicate with and implement a mechanism for integration tests.
+The CI/CD pipeline covered in this project is only for one application. Add some other units such as a database or another service that the app will communicate with and implement a mechanism for integration tests.
 
 Test the Terraform configurations using a tool such as [kitchen](https://newcontext-oss.github.io/kitchen-terraform/)
 
