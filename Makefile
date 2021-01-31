@@ -18,7 +18,7 @@ help: ##		Displays this message
 	@echo "--------------------------------------------------------------"
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##		/\n	/'
 	@echo "--------------------------------------------------------------"
-	@echo "Example usages with variables:"
+	@echo "Usage examples with variables:"
 	@echo "	HOST"
 	@echo "		Ex: make run -e HOST=0.0.0.0"
 	@echo "	PORT"

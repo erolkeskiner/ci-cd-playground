@@ -59,9 +59,9 @@ After the initial configuration steps, you can start using local Jenkins server 
 
 The command line tools used to run the CI/CD pipeline in this project such as docker, kubectl, terraform can be used with related plugins, as well as they can be executed from the host machine. 
 To use from the host machine, the binary executable files of these tools can be placed in a specific directory and this directory can be added to the Jenkins Global environment variables.
-In this project, the Jenkins server was installed locally as non-containerized service, and the mentioned command line tools were installed in a specific directory and used from there.
+In this project, the Jenkins server was installed locally as non-containerized service, and the mentioned command line tools were installed in a specific directory and used from there. Please note this is strictly not recommended for any production use.
 
-Also, in order to perform operations on the local K8s cluster from Jenkins, a kubeconfig file was created by connecting to the Minikube K8s cluster (refer [here](https://minikube.sigs.k8s.io/docs/start/) for the installation) from the local machine. 
+Also, in order to perform operations on the local K8s cluster from Jenkins, a [kubeconfig](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/) file was created by connecting to the Minikube K8s cluster (refer [here](https://minikube.sigs.k8s.io/docs/start/) for the installation) from the local machine. 
 This file was placed in a specific directory, and the file path has also been added to the Jenkins Global environment variables.
 
 ![Global Environmental Variables](img/global_env_vars.png)
