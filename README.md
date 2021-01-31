@@ -32,12 +32,12 @@ Before you get started you'll need to have these:
 ├── Jenkinsfile
 ├── Makefile
 ├── README.md
-├── app
-├── deploy
-│   ├── helm-chart
-│   └── terraform
-└── local-installations
-    └── jenkins
+├── app/
+├── deploy/
+│   ├── helm-chart/
+│   └── terraform/
+└── local-installations/
+    └── jenkins/
 ```
 
 `app` directory contains the source code and configuration files of the application.
