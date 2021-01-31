@@ -62,4 +62,22 @@ Three tags were used as suffixes to separate the packages: dev (development), rc
 - Any pipeline running from git tag builds the Python package and Docker image with the `<target-version>` tag, then publishes the Docker image to registry and deploys it to `prod` namespace on the K8s cluster.
 
 
+## Thoughts and Future Works
+For a healthier SDLC:
+
+- Make your developments in feature branches.
+- Create short-lived branches.
+- Commit often. 
+- Run the pipeline to see failures fast, test the deployment on K8s.
+- Prevent merging unhealthy branches to main branch.
+
+Expand the release version identification with [community standards](https://www.python.org/dev/peps/pep-0440/).
+
+Add more stages between development, release candidate, and release. This is not necessary since this is a personal and one-person project. But, with a growing team, it would be better to have more controls before merging the feature branches to the main branch.
+
+The CI/CD pipeline covered in this project is only for one application. Add some other units such as a database or an another service that the app will communicate with and implement a mechanism for integration tests.
+
+Test the Terraform configurations using a tool such as [kitchen](https://newcontext-oss.github.io/kitchen-terraform/)
+
+
 
