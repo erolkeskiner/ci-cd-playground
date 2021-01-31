@@ -33,59 +33,11 @@ Before you get started you'll need to have these:
 ├── Makefile
 ├── README.md
 ├── app
-│   ├── app
-│   │   ├── __init__.py
-│   │   ├── routes
-│   │   │   ├── __init__.py
-│   │   │   ├── base_routes.py
-│   │   │   ├── hello_world.py
-│   │   │   ├── versionz.py
-│   │   │   └── welcome.py
-│   │   └── tests
-│   │       ├── conftest.py
-│   │       └── test_app.py
-│   ├── Dockerfile.alpine
-│   ├── MANIFEST.in
-│   ├── README.md
-│   ├── config.py
-│   ├── gunicorn-config.py
-│   ├── logging-config.json
-│   ├── pylintrc
-│   ├── requirements.txt
-│   ├── setup.py
-│   └── target-version.json
 ├── deploy
 │   ├── helm-chart
-│   │   ├── flask-app
-│   │   │   ├── Chart.yaml
-│   │   │   ├── templates
-│   │   │   │   ├── NOTES.txt
-│   │   │   │   ├── _helpers.tpl
-│   │   │   │   ├── deployment.yaml
-│   │   │   │   ├── hpa.yaml
-│   │   │   │   ├── ingress.yaml
-│   │   │   │   ├── service.yaml
-│   │   │   │   └── tests
-│   │   │   │       └── test-connection.yaml
-│   │   │   └── values.yaml
-│   │   ├── dev-overrides.yaml
-│   │   ├── prod-overrides.yaml
-│   │   └── rc-overrides.yaml
 │   └── terraform
-│       ├── dev.tfvars
-│       ├── prod.tfvars
-│       ├── rc.tfvars
-│       ├── helm-release.tf
-│       ├── init.tf
-│       ├── namespace.tf
-│       └── variables.tf
 └── local-installations
     └── jenkins
-        ├── HOW_TO_MACOS.md
-        └── img
-            ├── credentials.png
-            ├── global_env_vars.png
-            └── mb_pipeline_configuration.png
 ```
 
 `app` directory contains the source code and configuration files of the application.
