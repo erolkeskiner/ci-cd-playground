@@ -51,7 +51,7 @@ On every pipeline execution, the code goes through the following steps:
 
 1. Code is cloned from this repository, built, tested and analyzed for bugs and bad patterns.
 2. A Docker Container Image is built then published to Docker Container Registry.
-3. If all successful, the pipeline is paused for the approval to continue to the deployment.
+3. If all previous steps finished successfully, the pipeline is paused for the approval to continue to the deployment.
 4. If approved, the container image is deployed in a fresh new container in related K8s namespace.
 
 Targeted release version for the Python package and Docker image is set in the `target-version.json` file in the `app` directory.
