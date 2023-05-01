@@ -29,7 +29,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'Flask==1.1.2',
+        'Flask==2.3.2',
         'flask-healthz==0.0.2',
         'gunicorn==20.0.4',
     ],
